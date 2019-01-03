@@ -1,0 +1,22 @@
+{
+  "name": "graphql-parser",
+  "version": "1.0.0",
+  "description": "This is parser with qraphQL, who can parse data from html pages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "graphql",
+    "parser"
+  ],
+  "author": "egretos",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.3.3",
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.0.2",
+    "puppeteer": "^1.11.0"
+  }
+}
