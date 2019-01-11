@@ -2,11 +2,19 @@ let { buildSchema } = require('graphql');
 
 let schema = buildSchema(`
     type Page {
-        title: String
-        pages: Int
         url: String
+        content(selector: String!): Content
+        list(Selector: String!): [Content]
     }
-    type
+    
+    type Content {
+        html: String
+        text: String
+        href: String
+        attr(name: String!): String 
+        content(selector: String!): Content
+        list(selector: String!): [Content]
+    }
 
     type Query {
         page(url: String!): Page
