@@ -6,6 +6,17 @@ class Page {
         const page = await engine.getBrowser().newPage();
         await page.goto(url);
         this.browserPage = page;
+        await page.evaluate(arg => {
+                window['getQuerySelector'] = el => {
+                    let path = [], parent;
+                    while (parent = el.parentNode) {
+                        path.unshift(`${el.tagName}:nth-child(${[].indexOf.call(parent.children, el)+1})`);
+                        el = parent;
+                    }
+                    return `${path.join(' > ')}`.toLowerCase();
+                }
+            }
+        );
         return page;
     }
 

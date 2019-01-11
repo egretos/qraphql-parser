@@ -4,22 +4,6 @@ class Content {
     constructor (page, selector) {
         this.page = page;
         this.selector = selector;
-        this.page.evaluate(arg => {window['test'] = el => {
-            let path = [], parent;
-            parent = el.parentNode;
-            while (parent) {
-                let tag = el.tagName, siblings;
-                path.unshift(
-                    el.id ? `#${el.id}` : (
-                        siblings = parent.children,
-                            [].filter.call(siblings, sibling => sibling.tagName === tag).length === 1 ? tag :
-                                `${tag}:nth-child(${1+[].indexOf.call(siblings, el)})`
-                    )
-                );
-                el = parent;
-            }
-            return `${path.join(' > ')}`.toLowerCase();
-        }}, ContentList.getSelector);
     }
 
     async text() {
@@ -44,20 +28,23 @@ class Content {
 
     async list(args) {
         let res = await this.page.evaluate(selector => {
-            let res = document.querySelectorAll(selector);
-            for (let key in res) {
-                console.dir(res[key]);
+            let elements = document.querySelectorAll(selector);
+            let result = [];
+            for (let key in elements) {
+                if (elements.hasOwnProperty(key)) {
+                    result.push(window.getQuerySelector(elements[key]));
+                }
             }
+            return result;
         }, args.selector);
-        return res;
-    }
-
-    async addFunc(func) {
-        await this.page.evaluate(() => {
-            window[func.name] = func;
-            window['teeet']= 'asd';
-            alert('ohoh');
-        });
+        let final = [];
+        for (let key in res) {
+            if (res.hasOwnProperty(key)) {
+                let selector = res[key];
+                await final.push(new Content(this.page, selector));
+            }
+        }
+        return final;
     }
 }
 
