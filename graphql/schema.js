@@ -8,9 +8,9 @@ let schema = buildSchema(`
     }
     
     type Content {
-        html: String
-        text: String
-        href: String
+        html(selector: String): String
+        text(selector: String): String
+        href(selector: String): String
         attr(name: String!): String 
         content(selector: String!): Content
         list(selector: String!): [Content]

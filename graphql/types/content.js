@@ -6,15 +6,24 @@ class Content {
         this.selector = selector;
     }
 
-    async text() {
+    async text(args) {
+        if (args.selector) {
+            return await this.page.$eval(this.selector + ' ' + args.selector, el => el.innerText);
+        }
         return await this.page.$eval(this.selector, el => el.innerText);
     }
 
-    async html() {
+    async html(args) {
+        if (args.selector) {
+            return await this.page.$eval(this.selector + ' ' + args.selector, el => el.outerHTML);
+        }
         return await this.page.$eval(this.selector, el => el.outerHTML);
     }
 
-    async href() {
+    async href(args) {
+        if (args.selector) {
+            return await this.page.$eval(this.selector + ' ' + args.selector, el => el.href);
+        }
         return await this.page.$eval(this.selector, el => el.href);
     }
 
@@ -23,7 +32,7 @@ class Content {
     }
 
     async content(args) {
-        return new Content(this.page, args.selector);
+        return new Content(this.page, this.selector + ' ' + args.selector);
     }
 
     async list(args) {
