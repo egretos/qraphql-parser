@@ -13,6 +13,11 @@ class Content {
         return await this.page.$eval(this.selector, el => el.innerText);
     }
 
+    async integer(args) {
+        let str = await this.text(args);
+        return await parseInt(await str.replace(/\D+/g,""));
+    }
+
     async html(args) {
         if (args.selector) {
             return await this.page.$eval(this.selector + ' ' + args.selector, el => el.outerHTML);
@@ -28,6 +33,9 @@ class Content {
     }
 
     async attr(args) {
+        if (args.selector) {
+            return await this.page.$eval(this.selector + ' ' + args.selector, (el, args) => el.getAttribute(args.name), args);
+        }
         return await this.page.$eval(this.selector, (el, args) => el.getAttribute(args.name), args);
     }
 
