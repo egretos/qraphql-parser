@@ -2,6 +2,10 @@
   "name": "graphql-parser",
   "version": "1.0.0",
   "description": "This is parser with qraphQL, who can parse data from html pages",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:egretos/qraphql-parser.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
