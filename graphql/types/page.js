@@ -24,6 +24,10 @@ class Page {
         return new Content(this.browserPage, args.selector);
     }
 
+    async list(args) {
+        return new Content(this.browserPage, args.selector).list(args);
+    }
+
     close() {
         try {
             this.browserPage.close();

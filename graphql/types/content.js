@@ -44,6 +44,10 @@ class Content {
     }
 
     async list(args) {
+        if (args.hasOwnProperty('listSelector')) {
+            return await new Content(this.page, this.selector + ' ' + args.listSelector).list({selector: args.selector});
+        }
+
         let res = await this.page.evaluate(selector => {
             let elements = document.querySelectorAll(selector);
             let result = [];

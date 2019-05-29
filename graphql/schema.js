@@ -4,7 +4,7 @@ let schema = buildSchema(`
     type Page {
         url: String
         content(selector: String!): Content
-        list(Selector: String!): [Content]
+        list(selector: String!, listSelector: String): [Content]
     }
     
     type Content {
@@ -14,7 +14,7 @@ let schema = buildSchema(`
         href(selector: String): String
         attr(selector: String, name: String!): String 
         content(selector: String!): Content
-        list(selector: String!): [Content]
+        list(selector: String!, listSelector: String): [Content]
     }
 
     type Query {
