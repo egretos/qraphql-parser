@@ -7,7 +7,7 @@ let engine = {
             this.stop();
         }
 
-        this.browser = await puppeteer.launch({headless: true});
+        this.browser = await puppeteer.launch({headless: false});
         console.log('Running a Google chrome with PID '.green + `${this.browser.process().pid}`.blue);
     },
     stop: () => {
