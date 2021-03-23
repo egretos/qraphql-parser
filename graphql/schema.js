@@ -3,18 +3,18 @@ let { buildSchema } = require('graphql');
 let schema = buildSchema(`
     type Page {
         url: String
-        content(selector: String!): Content
-        list(selector: String!, listSelector: String): [Content]
+        element(selector: String!): Element
+        list(selector: String!, listSelector: String): [Element]
     }
     
-    type Content {
+    type Element {
         html(selector: String): String
         text(selector: String): String
         integer(selector: String): Int
         href(selector: String): String
         attr(selector: String, name: String!): String 
-        content(selector: String!): Content
-        list(selector: String!, listSelector: String): [Content]
+        content(selector: String!): Element
+        list(selector: String!, listSelector: String): [Element]
     }
 
     type Query {

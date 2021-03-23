@@ -1,6 +1,6 @@
 let ContentList = require('./contentList');
 
-class Content {
+class Element {
     constructor (page, selector) {
         this.page = page;
         this.selector = selector;
@@ -69,4 +69,4 @@ class Content {
     }
 }
 
-module.exports = Content;
+module.exports = Element;

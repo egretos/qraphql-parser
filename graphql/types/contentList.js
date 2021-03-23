@@ -1,4 +1,4 @@
-const Content = require('./content');
+const Content = require('./element');
 
 class ContentList {
     constructor (page, selector) {
